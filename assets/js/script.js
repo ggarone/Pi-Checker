@@ -28,15 +28,17 @@ let value = 0;
 let count = 0;
 let correctDigits = 0;
 
-//don't allow any keys that are not numbers or backspace
-input.addEventListener('keydown', function(e) {
-	if (48 <= e.which && e.which <= 57 || 96 <= e.which && e.which <= 105 || e.which === 8) {
-	} else {
-		e.preventDefault();
+//don't allow any keys that are not numbers or backspace(using regex)
+input.addEventListener('keydown', function(typedChar){
+	var letterRegex = /[^0-9]/;
+
+	if(letterRegex.test(typedChar.key) && typedChar.key !== 'Backspace'){
+		typedChar.preventDefault();
 	}
+	console.log(`${value.length} ${maxNumberOfDigits}`);
 	if (value.length >= maxNumberOfDigits){
-		if(e.which !== 8)
-			e.preventDefault();
+		if(typedChar.key !== 'Backspace')
+			typedChar.preventDefault();
 	}
 });
 
@@ -45,7 +47,6 @@ input.addEventListener('input', (key) => {
 	const inputType = key.inputType;
 	let oldText = piResult.innerHTML;
 	value = input.value;
-	console.log(value);
 
 	//if input is empty set piRusult to the start
 	if(checkIfEmpty(value))
