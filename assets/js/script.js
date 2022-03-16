@@ -35,7 +35,6 @@ input.addEventListener('keydown', function(typedChar){
 	if(letterRegex.test(typedChar.key) && typedChar.key !== 'Backspace'){
 		typedChar.preventDefault();
 	}
-	console.log(`${value.length} ${maxNumberOfDigits}`);
 	if (value.length >= maxNumberOfDigits){
 		if(typedChar.key !== 'Backspace')
 			typedChar.preventDefault();
